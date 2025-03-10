@@ -16,9 +16,9 @@ The Log Archive Tool (`log-archive`) automates the process of backing up log dir
 
 ## Installation
 
-1. Save the script to a file named `log-archive`:
+1. Clone this repository:
    ```bash
-   sudo nano /usr/local/bin/log-archive
+   git clone https://github.com/MiguelTolino/log-archive.git
    ```
 
 2. Make it executable:
@@ -26,7 +26,15 @@ The Log Archive Tool (`log-archive`) automates the process of backing up log dir
    sudo chmod +x /usr/local/bin/log-archive
    ```
 
-3. Ensure it's in your PATH (using `/usr/local/bin/` is recommended)
+3. Move to a directory in your PATH (e.g., `/usr/local/bin/`):
+   ```bash
+   sudo mv log-archive /usr/local/bin/
+   ```
+
+4. Ensure it's in your PATH (using `/usr/local/bin/` is recommended):
+   ```bash
+   echo $PATH
+   ```
 
 ## Usage
 
