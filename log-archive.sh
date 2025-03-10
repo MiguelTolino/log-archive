@@ -1,19 +1,35 @@
 #!/bin/bash
 
 # log-archive: A tool to archive log files into .tar.gz format
-# Usage: log-archive <log-directory>
+# Usage: log-archive <log-directory> [archive-directory]
 
-# Check if directory parameter is provided
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 <log-directory>"
+# Check if required parameters are provided
+if [ $# -lt 1 ] || [ $# -gt 2 ]; then
+    echo "Usage: $0 <log-directory> [archive-directory]"
     exit 1
 fi
 
 LOG_DIR="$1"
-ARCHIVE_DIR="/var/archives/logs"
-LOG_FILE="/var/archives/logs/archive_history.log"
 
-# Check if the provided directory exists
+# Set default archive directory or use provided parameter
+DEFAULT_ARCHIVE_DIR="/var/archives/logs"
+if [ $# -eq 2 ]; then
+    ARCHIVE_DIR="$2"
+else
+    # Check if ARCHIVE_DIR environment variable is set
+    if [ -n "$ARCHIVE_DIR" ]; then
+        # Use the environment variable
+        echo "Using archive directory from environment variable: $ARCHIVE_DIR"
+    else
+        # Use default
+        ARCHIVE_DIR="$DEFAULT_ARCHIVE_DIR"
+    fi
+fi
+
+# Set log file path based on archive directory
+LOG_FILE="$ARCHIVE_DIR/archive_history.log"
+
+# Check if the provided log directory exists
 if [ ! -d "$LOG_DIR" ]; then
     echo "Error: Directory '$LOG_DIR' does not exist."
     exit 1

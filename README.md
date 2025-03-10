@@ -45,23 +45,33 @@ The Log Archive Tool (`log-archive`) automates the process of backing up log dir
 ## Usage
 
 ```
-log-archive <log-directory>
+log-archive <log-directory> [archive-directory]
 ```
 
 ### Parameters
 
-- `<log-directory>`: The directory containing logs to archive
+- `<log-directory>`: The directory containing logs to archive (required)
+- `[archive-directory]`: Custom location to store archives (optional)
+
+### Environment Variables
+
+- `ARCHIVE_DIR`: Set this environment variable to specify a custom archive directory
 
 ### Examples
 
-Archive system logs:
+Archive system logs to the default location:
 ```bash
 sudo log-archive /var/log
 ```
 
-Archive application logs:
+Archive application logs to a custom location:
 ```bash
-log-archive /path/to/app/logs
+log-archive /path/to/app/logs /path/to/custom/archive
+```
+
+Using an environment variable:
+```bash
+ARCHIVE_DIR=/my/archive/location log-archive /path/to/app/logs
 ```
 
 ## Output
